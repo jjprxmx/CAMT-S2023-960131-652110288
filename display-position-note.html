@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <style>
+            .realhead{
+                font-size: 50px;
+            }
+            .outline{
+                border-style: dashed;
+                border-width: 1.5px;
+                margin-top: 1%;
+                background-color:  #F0F8FF;
+                padding: 1%;
+            }
+            .one{
+                background-color: #FAC0CB;
+                padding: 5%;
+            }
+            .two{
+                background-color: #F44502;
+                padding: 5%;  
+            }
+            .three{
+                background-color:#F7A501 ;
+                padding: 5%; 
+            }
+            .four{
+                background-color:#238000;
+            }
+            .inline{
+                display: inline;
+                font-size: 20px;
+            }
+            .block{
+                display: block;
+                font-size: 20px;
+            }
+            .next{
+                margin-left: -4px;
+            }
+            .fixed {
+                position: fixed;
+                top: 50%;
+                right: 5;
+                width: 100%;
+                border: 3px solid #73AD21;
+            }
+        </style>
+    </head>
+    <body>
+    <!-- Box Model Component -->
+        <h1 class="realhead">Box Model</h1>
+        <div class="outline">
+                <div class="one">
+                    <div class="two">
+                        <div class="three">
+                            <div class="four">
+                                <h1>Simple Box</h1> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- CSS Display -->
+        <h1 class="realhead">CSS Display</h1>
+        <h2>inline</h2>
+        <div class="outline">
+                <div class="inline" style="background-color: #FDFE01;">inline text1</div>
+                <div class="inline next" style="background-color: #F7A501;">inline text2</div>
+                <div class="inline next" style="background-color: #F40103;">inline text3</div>
+                <div class="inline next" style="background-color: #238000;">inline text4</div>
+                <div class="inline next" style="background-color: #800480;">inline text5</div>
+        </div>
+
+        <h2>block</h2>
+        <div class="outline">
+                <div class="block" style="background-color: #FDFE01;">block text1</div>
+                <div class="block" style="background-color: #F7A501;">block text2</div>
+                <div class="block" style="background-color: #F40103;">block text3</div>
+                <div class="block" style="background-color: #238000;">block text4</div>
+                <div class="block" style="background-color: #800480;">block text5</div>
+        </div>
+
+        <h2>inline-block</h2>
+        <div class="outline">
+                <div style="display: inline-block;">apple</div>
+                <div style="display: inline-block;">orange</div>
+                <div style="display: inline-block;">mango</div>
+                <div style="display: inline-block;">watermelon</div>
+        </div>
+
+        <h2>none</h2>
+        <div class="outline">
+                <div style="display: inline-block;">apple</div>
+                <div style="display: inline-block;">orange</div>
+                <div style="display: none;">mango</div>
+                <div style="display: inline-block;">watermelon</div>
+        </div>
+
+        <h2>display:none vs visibility:hidden</h2>
+        <div class="outline">
+                <div style="display: inline;">apple</div>
+                <div style="display: inline; visibility: hidden;">orange</div>
+                <div style="display: none;">mango</div>
+                <div style="display: inline;">watermelon</div>
+        </div>
+
+        <h2>CSS Position</h2>
+
+        <h3>static</h3>
+        <div class="outline">
+            <div style="position: static; background-color: #F66C73; border-style: solid; border-width: 1px; border-color: red; height: 50px; width: 50px;"></div>
+        </div>
+
+        <h3>absolute</h3>
+        <div style="position: absolute;">
+            <div style="position: absolute; top: 50px; background-color: #F66C73; opacity: 0.75; border-style: solid; border-width: 1px; border-color: red; height: 50px; width: 50px;"></div>
+        </div>       
+ 
+        <h3>fixed width/height</h3>
+        <div class="outline">
+            <div style="position: fixed; background-color: #F66C73; border-style: solid; border-width: 1px; border-color: red; height: 50px; width: 50px;"></div>
+        </div>        
+
+        <h3>no width/height</h3>
+        <div class="outline">
+            <div style="position: static; border: 3px solid #F66C73;"></div>
+        </div>  
+
+        <h3>fixed width/height + right/top</h3>
+        <div class="outline">
+            <div style="border: 3px solid #F66C73; position: fixed; width: 90%; height: 50px; right: 50; top: 97%;"></div>
+        </div>  
+
+    </div>
+    </body>
+    <footer>
+
+    </footer>
+</html>
