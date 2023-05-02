@@ -71,90 +71,109 @@
     </head>
 <body style="font-family: 'Prompt', sans-serif;  background-color: rgb(160, 201, 132);">
 
-
-<script>
-
-    //use arrow function because shorter
-const myFunction =()=> {
-
-  // card number and type
-var CARD_TYPE = ['♣', '♦', '♥', '♠']
-var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
-
-// random function
-// max: number > 0
-// return [0, max -1]
-function random(max) {
-   return parseInt(Math.random() * max) % max
-}
-
-// how to use random function
-const randcard =(amount)=>{
-    let i = 0;
-    var cardType = [];
-    var cardNumber = [];
-
-    while(i<amount){
-        //random
-        cardType[i] = CARD_TYPE[random(CARD_TYPE.length)]
-        cardNumber[i] = CARD_NUMBER[random(CARD_NUMBER.length)]
-        //after random type and number send data to display function
-        display(i+1, cardType[i], cardNumber[i])
-        i++
-    }   
-    
-}
-
-//set number type and color
-const display =(id , type, number)=>{
-     if(type == "♦" || type == "♥"){
-        document.getElementById(`type${id}`).innerHTML = type;
-        document.getElementById(`number${id}`).innerHTML = number;
-        document.getElementById(`card${id}`).style.borderColor = "red"
-        document.getElementById(`type${id}`).style.color = "red"
-        document.getElementById(`number${id}`).style.color = "red"
-     }else{
-        document.getElementById(`type${id}`).innerHTML = type;
-        document.getElementById(`number${id}`).innerHTML = number;
-        document.getElementById(`card${id}`).style.borderColor = "black"
-        document.getElementById(`type${id}`).style.color = "black"
-        document.getElementById(`number${id}`).style.color = "black"
-     }
-}
-
-//4cards
-randcard(4)
-
-}
-</script>
 <center>
     <h1>Random Cards</h1>
 </center>
 
-<div class="content">
+<div class="content" id="content">
     <center><img src="/images/dealer.png" width="65%" height="auto" style="margin-top: -100%;"></center>
-    <div class="card" id="card1">
-        <span id="type1" class="type">?</span>
-      <span id="number1" class="number">?</span>
-    </div>
-    <div class="card" id="card2">
-        <span id="type2" class="type">?</span>
-      <span id="number2" class="number">?</span>
-    </div>
-    <div class="card" id="card3">
-        <span id="type3" class="type">?</span>
-      <span id="number3" class="number">?</span>
-    </div>
-    <div class="card" id="card4">
-        <span id="type4" class="type">?</span>
-      <span id="number4" class="number">?</span>
-    </div>
-    
  
         <button class="bottom" onclick="myFunction()">Click to Random</button>
 
-    
 </div>
+
+<script>
+
+    //function สร้างไพ่
+    const createcard =(amount)=>{
+        let i = 0;
+        while(i<amount){
+    const carddiv = document.createElement("div");
+    carddiv.setAttribute("id", `card${i+1}`)
+    carddiv.setAttribute("class", `card`)
+    
+    // Append to another element:
+    document.getElementById("content").appendChild(carddiv);
+
+    //เรียก function สร้างตัวเลขและโพ ค่าเริ่มต้นคือ "?"
+    insidecard(i+1)
+    i++
+        }
+    }
+    
+    //function สร้างตัวเลขและโพในไพ่ค่าเริ่มต้นคือ "?"
+    const insidecard =(id)=>{
+            const createspantype = document.createElement("span")
+            createspantype.setAttribute("id", `type${id}`)
+            createspantype.setAttribute("class", "type")
+            createspantype.innerHTML = "?"
+
+            const createspannumber = document.createElement("span")
+            createspannumber.setAttribute("id", `number${id}`)
+            createspannumber.setAttribute("class", "number")
+            createspannumber.innerHTML = "?"
+    
+            document.getElementById(`card${id}`).appendChild(createspantype);
+            document.getElementById(`card${id}`).appendChild(createspannumber);
+            
+    }
+    
+    //สร้างไพ่ 4ใบ
+    createcard(4)
+    
+        //use arrow function because shorter เริ่มใช้ตอนคลิ๊ก
+    const myFunction =()=> {
+    
+      // card number and type
+    var CARD_TYPE = ['♣', '♦', '♥', '♠']
+    var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
+    
+    // random function
+    // max: number > 0
+    // return [0, max -1]
+    function random(max) {
+       return parseInt(Math.random() * max) % max
+    }
+    
+    // how to use random function
+    const randcard =(amount)=>{
+        let i = 0;
+        var cardType = [];
+        var cardNumber = [];
+    
+        while(i<amount){
+            //random
+            cardType[i] = CARD_TYPE[random(CARD_TYPE.length)]
+            cardNumber[i] = CARD_NUMBER[random(CARD_NUMBER.length)]
+            //after random type and number send data to display function
+            display(i+1, cardType[i], cardNumber[i])
+            i++
+        }   
+        
+    }
+    
+    //set number type and color
+    const display =(id , type, number)=>{
+         if(type == "♦" || type == "♥"){
+            document.getElementById(`type${id}`).innerHTML = type;
+            document.getElementById(`number${id}`).innerHTML = number;
+            document.getElementById(`card${id}`).style.borderColor = "red"
+            document.getElementById(`type${id}`).style.color = "red"
+            document.getElementById(`number${id}`).style.color = "red"
+         }else{
+            document.getElementById(`type${id}`).innerHTML = type;
+            document.getElementById(`number${id}`).innerHTML = number;
+            document.getElementById(`card${id}`).style.borderColor = "black"
+            document.getElementById(`type${id}`).style.color = "black"
+            document.getElementById(`number${id}`).style.color = "black"
+         }
+    }
+    
+    //4cards
+    randcard(4)
+    
+    }
+    </script>
 
 </body>
 <footer>
