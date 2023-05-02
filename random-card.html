@@ -73,10 +73,13 @@
 
 
 <script>
-function myFunction() {
+
+    //use arrow function because shorter
+const myFunction =()=> {
+
   // card number and type
 var CARD_TYPE = ['♣', '♦', '♥', '♠']
-var CARD_NUMBER = ['A', '1', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
+var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
 
 // random function
 // max: number > 0
@@ -86,74 +89,41 @@ function random(max) {
 }
 
 // how to use random function
-var cardType1 = CARD_TYPE[random(CARD_TYPE.length)]
-var cardNumber1 = CARD_NUMBER[random(CARD_NUMBER.length)]
-var cardType2 = CARD_TYPE[random(CARD_TYPE.length)]
-var cardNumber2 = CARD_NUMBER[random(CARD_NUMBER.length)]
-var cardType3 = CARD_TYPE[random(CARD_TYPE.length)]
-var cardNumber3 = CARD_NUMBER[random(CARD_NUMBER.length)]
-var cardType4 = CARD_TYPE[random(CARD_TYPE.length)]
-var cardNumber4 = CARD_NUMBER[random(CARD_NUMBER.length)]
+const randcard =(amount)=>{
+    let i = 0;
+    var cardType = [];
+    var cardNumber = [];
 
-//card1
-if(cardType1 == "♦" || cardType1 == "♥"){
-    document.getElementById("type1").innerHTML = cardType1;
-    document.getElementById("number1").innerHTML = cardNumber1;
-    document.getElementById("card1").style.borderColor = "red"
-    document.getElementById("type1").style.color = "red"
-    document.getElementById("number1").style.color = "red"
-}else{
-    document.getElementById("type1").innerHTML = cardType1;
-    document.getElementById("number1").innerHTML = cardNumber1;
-    document.getElementById("card1").style.borderColor = "black"
-    document.getElementById("type1").style.color = "black"
-    document.getElementById("number1").style.color = "black"
+    while(i<amount){
+        //random
+        cardType[i] = CARD_TYPE[random(CARD_TYPE.length)]
+        cardNumber[i] = CARD_NUMBER[random(CARD_NUMBER.length)]
+        //after random type and number send data to display function
+        display(i+1, cardType[i], cardNumber[i])
+        i++
+    }   
+    
 }
 
-//card2
-if(cardType2 == "♦" || cardType2 == "♥"){
-    document.getElementById("type2").innerHTML = cardType2;
-    document.getElementById("number2").innerHTML = cardNumber2;
-    document.getElementById("card2").style.borderColor = "red"
-    document.getElementById("type2").style.color = "red"
-    document.getElementById("number2").style.color = "red"
-}else{
-    document.getElementById("type2").innerHTML = cardType2;
-    document.getElementById("number2").innerHTML = cardNumber2;
-    document.getElementById("card2").style.borderColor = "black"
-    document.getElementById("type2").style.color = "black"
-    document.getElementById("number2").style.color = "black"
+//set number type and color
+const display =(id , type, number)=>{
+     if(type == "♦" || type == "♥"){
+        document.getElementById(`type${id}`).innerHTML = type;
+        document.getElementById(`number${id}`).innerHTML = number;
+        document.getElementById(`card${id}`).style.borderColor = "red"
+        document.getElementById(`type${id}`).style.color = "red"
+        document.getElementById(`number${id}`).style.color = "red"
+     }else{
+        document.getElementById(`type${id}`).innerHTML = type;
+        document.getElementById(`number${id}`).innerHTML = number;
+        document.getElementById(`card${id}`).style.borderColor = "black"
+        document.getElementById(`type${id}`).style.color = "black"
+        document.getElementById(`number${id}`).style.color = "black"
+     }
 }
 
-//card3
-if(cardType3 == "♦" || cardType3 == "♥"){
-    document.getElementById("type3").innerHTML = cardType3;
-    document.getElementById("number3").innerHTML = cardNumber3;
-    document.getElementById("card3").style.borderColor = "red"
-    document.getElementById("type3").style.color = "red"
-    document.getElementById("number3").style.color = "red"
-}else{
-    document.getElementById("type3").innerHTML = cardType3;
-    document.getElementById("number3").innerHTML = cardNumber3;
-    document.getElementById("card3").style.borderColor = "black"
-    document.getElementById("type3").style.color = "black"
-    document.getElementById("number3").style.color = "black"
-}
-
-//card4
-if(cardType4 == "♦" || cardType4 == "♥"){
-    document.getElementById("type4").innerHTML = cardType4;
-    document.getElementById("number4").innerHTML = cardNumber4;
-    document.getElementById("card4").style.borderColor = "red"
-    document.getElementById("type4").style.color = "red"
-    document.getElementById("number4").style.color = "red"
-}else{
-    document.getElementById("type4").innerHTML = cardType4;
-    document.getElementById("number4").innerHTML = cardNumber4;
-    document.getElementById("card4").style.borderColor = "black"
-    document.getElementById("type4").style.color = "black"
-    document.getElementById("number4").style.color = "black"
-}
+//4cards
+randcard(4)
 
 }
 </script>
