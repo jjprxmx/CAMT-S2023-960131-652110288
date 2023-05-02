@@ -83,6 +83,9 @@
 </div>
 
 <script>
+    //x คือ จำนวนไพ่ แนะนำ4ใบ เพราะ css สวย
+    var x = 4;
+
 
     //function สร้างไพ่
     const createcard =(amount)=>{
@@ -119,7 +122,7 @@
     }
     
     //สร้างไพ่ 4ใบ
-    createcard(4)
+    createcard(x)
     
         //use arrow function because shorter เริ่มใช้ตอนคลิ๊ก
     const myFunction =()=> {
@@ -135,7 +138,7 @@
        return parseInt(Math.random() * max) % max
     }
     
-    // how to use random function
+    // random function
     const randcard =(amount)=>{
         let i = 0;
         var cardType = [];
@@ -169,8 +172,8 @@
          }
     }
     
-    //4cards
-    randcard(4)
+    //สุ่มไพ่ xใบ กำหนดตอนแรก
+    randcard(x)
     
     }
     </script>
