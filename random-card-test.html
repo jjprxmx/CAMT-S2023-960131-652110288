@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    .background{
+        background-color:rgb(82, 78, 78);
+       
+    }
+
+
+    .bord{
+        background-color: rgb(30, 141, 168);
+        border: 15px solid rgb(53, 43, 43);
+        box-shadow: 10px 10px 0px rgba(0,0,0,.2);
+        border-radius: 30%;
+        position: absolute;
+        width: 90%;
+        height: 95%;
+        top: 1%;
+        left: 5%;
+        
+
+    }
+    .card{
+        background-color: rgb(255, 255, 255);
+        border: 2px solid black;
+        border-radius: 5%;
+        width: 10%;
+        height: 30%;
+        display: inline-block;
+        position: relative;
+        top: 60%;
+        left: 39%;
+        margin-left: -3%;
+
+       
+    }
+
+    .button{
+        background-color: rgb(243, 236, 236);
+        border-radius: 40%;
+        position: absolute;
+        width: 8%;
+        height: 9%;
+        top: 90%;
+        left: 90%;
+        cursor: pointer;
+    }
+
+    .title{
+        font-size:250%; 
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        position: absolute;
+        top: -20%;
+        left: 5%;
+    }
+    .poker{
+        font-size:100px; 
+        position: absolute;
+        top: -40%;
+        left:25%;
+    }
+
+
+</style>
+
+</head>
+<body class="background">
+        <input class="box" type="number" id="numCard" ></input>
+        <button class="" onclick="setx()">Set </button>
+        <div class="bord" id="bord">
+                <script>
+                    let x=4;
+
+                    function setx(){
+                        removecard(x)
+                        x = document.getElementById(`numCard`).value;
+                        createcard(x)
+                    }
+
+
+
+
+                    createcard(x)
+                    function createcard(x){
+                        for(let i=0; i<x ;i++){
+                        const divCard=document.createElement("div");
+                        divCard.setAttribute("id",`c${i+1}`)
+                        divCard.setAttribute("class",`card`)
+                
+                        document.getElementById("bord").appendChild(divCard);
+
+                        insideCard(i+1)
+                      
+                        }
+                    
+
+                }
+
+                function removecard(x){
+                        for(let i=0; i<x ;i++){
+                        const divCard=document.getElementById(`c${i+1}`);
+                        divCard.remove();
+                
+                      
+                        }
+                    
+
+                }
+
+                function insideCard(id){
+                    const title = document.createElement("p");
+                    title.setAttribute("id",`title${id}`)
+                    title.setAttribute("class",`title`)
+                    
+
+                    const poker = document.createElement("p");
+                    poker.setAttribute("id",`poker${id}`)
+                    poker.setAttribute("class",`poker`)
+                    
+
+                    document.getElementById(`c${id}`).appendChild(title);
+                    document.getElementById(`c${id}`).appendChild(poker);
+                   }
+
+                   function randomCard(x){
+                    var cardType = [];
+                    var cardNumber = [];
+
+                    
+                    for(let j=0;j<x;j++){
+                    // card number and type
+                    var CARD_TYPE = ['♣', '♦', '♥', '♠']
+                    var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
+    
+                    // random function
+                    // max: number > 0
+                    // return [0, max -1]
+                   
+
+                    function random(max) {
+                      return parseInt(Math.random() * max) % max
+                    }
+    
+                    // how to use random function
+                     cardType[j] = CARD_TYPE[random(CARD_TYPE.length)]
+                     cardNumber[j] = CARD_NUMBER[random(CARD_NUMBER.length)]
+                 
+                    //-----------------------------------------
+
+                    if(cardType[j]=='♥'||cardType[j]=='♦'){
+                    document.getElementById(`title${j+1}`).innerText=cardNumber[j];
+                    document.getElementById(`poker${j+1}`).innerText=cardType[j];
+                    document.getElementById(`c${j+1}`).style.borderColor= "red"
+                    document.getElementById(`title${j+1}`).style.color = "red"
+                    document.getElementById(`poker${j+1}`).style.color = "red"    
+                    }
+                    else{
+                    document.getElementById(`title${j+1}`).innerText=cardNumber[j];
+                    document.getElementById(`poker${j+1}`).innerText=cardType[j];
+                    document.getElementById(`c${j+1}`).style.borderColor= "black"
+                    document.getElementById(`title${j+1}`).style.color = "black"
+                    document.getElementById(`poker${j+1}`).style.color = "black"    
+                    }
+                
+                    }
+                    
+                    
+                }
+                   
+           
+
+
+                    </script>
+    
+
+        </div>
+
+        
+        <button class="button" onclick="randomCard(x)">
+        <h3 style="text-align:center;">Click to random</h3>
+        </button>
+</body>
+</html>
