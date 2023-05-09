@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board{
+            background-color: rgb(145, 202, 241);
+            border-radius: 10px;
+            border: 2px solid gray;
+            position:relative;
+            margin: auto;
+            margin-top: 50px;
+            width: 95%;
+            height: 85vh;
+        }
+        .board-content{
+            position: relative;
+            display:flex;
+            
+            
+        }
+        .card-zone{
+           display: flex;
+           flex-wrap: wrap;
+           
+            width: 80%;
+            height: 73vh;
+           
+          
+        }
+        .card{
+            margin-right: 1%;
+            box-shadow: 2px 2px 5px rgb(67, 66, 66);
+            border: 2px solid rgb(5, 5, 5);
+            border-radius:5px ;
+            background-color: #ffffff;
+            position: relative;
+            top: 2%;
+            left: 2%;
+            width: 8vh;
+            height: 15vh;
+        }
+        .card-title{
+            width: 100%;
+            height: 2vh;
+            position: relative;
+            left: 70%;
+    
+        }
+    
+        .card-body{
+            font-weight: 100;
+            width: 100%;
+            height: 13vh;
+            font-size: 30px;
+            position: relative;
+            top: 20%;
+            left: 40%;
+            color: #fcfcfc;
+        }
+    
+        .card-face-down{
+            margin-right:1% ;
+            box-shadow: 2px 2px 5px rgb(67, 66, 66);
+            border: 2px solid rgb(254, 251, 251);
+            border-radius:5px ;
+            background-color: #d1cece;
+            position: relative;
+            top: 2%;
+            left: 2%;
+            width: 8vh;
+            height: 15vh;
+        }
+    
+        .player-zone{
+            width: 20%;
+            border-left:2px solid gray ;
+        }
+    
+        .player-title{
+            color: #ffffff;
+            font-weight: 200;
+            font-size: 15px;
+            text-align: center;
+            position: relative;
+            top: 5%;
+        }
+        .player-score{
+            color: #ffffff;
+            font-weight: 200;
+            font-size: 80px;
+            text-align: center;
+            position: relative;
+            
+            top: 25%;
+        }
+    
+        .player-player-a{
+            width: 100%;
+            height: 50%;
+        }
+    
+        .player-player-b{
+            width: 100%;
+            height: 50%;
+            border-top:2px solid gray ;
+        }
+    
+        .new-game-button{
+            position:absolute;
+            bottom: 0;
+            height: 15%;
+            width: 100%;
+            border-radius: 0px 0px 10px 10px;
+            border: none;
+            cursor: pointer;
+        }
+    
+    
+    </style>
+    
+    </head>
+    <body>
+        <div class="board">
+            <div class="board-content">
+              <div class="card-zone" id="card-zone">
+                <!-- something to do next -->
+                <!--<div class="card">
+                    <div class="card-title">
+                        
+                  </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+    
+                <div class="card-face-down">
+                    <div class="card-title">
+                        
+                  </div>
+                    <div class="card-body">
+                        ?
+                    </div>
+                </div>-->
+    
+              </div>
+              <div class="player-zone">
+                <div class="player-player-a">
+                  <div class="player-title">
+                    Player A
+                  </div>
+                  <div class="player-score">
+                    0
+                  </div>
+                </div>
+                <div class="player-player-b">
+                  <div class="player-title">
+                    Player B
+                  </div>
+                  <div class="player-score">
+                    0
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+                <button class="new-game-button" onclick="renderCardList()">New Game</button>
+            </div>
+          </div>
+
+          <script>
+               var randomList = [] 
+               var match = []
+               var cardList = [
+                { value: ['♣', 'A'], isFaceDown: true },
+                { value: ['♣', '2'], isFaceDown: false },
+                { value: ['♣', '3'], isFaceDown: true },
+                { value: ['♣', '4'], isFaceDown: false },
+                { value: ['♣', '5'], isFaceDown: true },
+                { value: ['♣', '6'], isFaceDown: true },
+                { value: ['♣', '7'], isFaceDown: true },
+                { value: ['♣', '8'], isFaceDown: false },
+                { value: ['♣', '9'], isFaceDown: true },
+                { value: ['♣', '10'], isFaceDown: true },
+                { value: ['♣', 'J'], isFaceDown: true },
+                { value: ['♣', 'Q'], isFaceDown: true },
+                { value: ['♣', 'K'], isFaceDown: false },
+                { value: ['♥', 'A'], isFaceDown: true },
+                { value: ['♥', '2'], isFaceDown: true },
+                { value: ['♥', '3'], isFaceDown: false },
+                { value: ['♥', '4'], isFaceDown: false },
+                { value: ['♥', '5'], isFaceDown: true },
+                { value: ['♥', '6'], isFaceDown: false },
+                { value: ['♥', '7'], isFaceDown: true },
+                { value: ['♥', '8'], isFaceDown: true },
+                { value: ['♥', '9'], isFaceDown: true },
+                { value: ['♥', '10'], isFaceDown: true },
+                { value: ['♥', 'J'], isFaceDown: true },
+                { value: ['♥', 'Q'], isFaceDown: true },
+                { value: ['♥', 'K'], isFaceDown: false },
+              ]
+          window.onload = function() {
+          
+              //1-3
+              createcard(cardList.length)
+          };
+          
+          
+          
+          function createcard(amount) {
+                  let i = 0;
+                  while(i<amount){
+              const cardZoneElm = document.createElement("div");
+              cardZoneElm.setAttribute("id", `card${i+1}`) //jsx
+              cardZoneElm.setAttribute("class", `card-face-down`)
+              
+              // Append to another element:
+              document.getElementById("card-zone").appendChild(cardZoneElm);
+          
+              //เรียก function สร้างตัวเลขและโพ ค่าเริ่มต้นคือ "?"
+              insidecard(i+1)
+              i++
+                  }
+              }
+          
+              function insidecard(id){
+                      const createspantype = document.createElement("div")
+                      createspantype.setAttribute("id", `type${id}`)
+                      createspantype.setAttribute("class", "card-title")
+                      createspantype.innerHTML = ""
+          
+                      const createspannumber = document.createElement("div")
+                      createspannumber.setAttribute("id", `number${id}`)
+                      createspannumber.setAttribute("class", "card-body")
+                      createspannumber.innerHTML = "?"
+              
+                      document.getElementById(`card${id}`).appendChild(createspantype);
+                      document.getElementById(`card${id}`).appendChild(createspannumber);
+                      
+              }
+          
+          function renderCardList() {
+            var CARD_TYPE = ['♣', '♦', '♥', '♠']
+            var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
+            var CARD_FACE = [true,false]
+            
+          
+              // random function
+              // max: number > 0
+              // return [0, max -1]
+              function random(max) {
+                 return parseInt(Math.random() * max) % max
+              }
+              
+              // random function
+              function randcard(amount){
+                  let i = 0;
+                  let j = 0;
+
+                  //clear data
+                  randomList = []
+                  while(j<match.length){
+                    display(match[j], "", "", true)
+                    j++
+                  }
+                  match = []
+
+                    //random
+                  while(i<amount){
+                      
+                      randomList.splice(i,0,{value: [CARD_TYPE[random(CARD_TYPE.length)], CARD_NUMBER[random(CARD_NUMBER.length)]], isFaceDown:CARD_FACE[random(CARD_FACE.length)]})
+                      search(i)
+                      //after random type and number send data to display function
+                      i++
+                  }
+              }
+
+              
+          function search(id){
+            let i =0
+            while(i<cardList.length){
+                if(randomList[id].value[0] == cardList[i].value[0] && randomList[id].value[1] == cardList[i].value[1] ){
+                    console.log(`${id+1} = ${i+1}: ${randomList[id].value[0]}${randomList[id].value[1]} = ${cardList[i].value[0]}${cardList[i].value[1]}`)
+                    display(id+1, randomList[id].value[0], randomList[id].value[1], false)
+                    match.push(id+1)
+                    
+                }
+            
+                i++
+            }
+          }
+
+              //set number type ,color and check face
+              function display(id , type, number, face){
+                if(!face){
+                  if(type == "♦" || type == "♥"){
+                      document.getElementById(`type${id}`).innerHTML = type;
+                      document.getElementById(`number${id}`).innerHTML = number;
+                      document.getElementById(`card${id}`).className = "card"
+                      document.getElementById(`card${id}`).style.borderColor = "red"
+                      document.getElementById(`type${id}`).style.color = "red"
+                      document.getElementById(`number${id}`).style.color = "red"
+                   }else{
+                      document.getElementById(`type${id}`).innerHTML = type;
+                      document.getElementById(`number${id}`).innerHTML = number;
+                      document.getElementById(`card${id}`).className = "card"
+                      document.getElementById(`card${id}`).style.borderColor = "black"
+                      document.getElementById(`type${id}`).style.color = "black"
+                      document.getElementById(`number${id}`).style.color = "black"
+                   }
+                }else{
+                  document.getElementById(`type${id}`).innerHTML = " ";
+                  document.getElementById(`number${id}`).innerHTML = "?";
+                  document.getElementById(`card${id}`).className = "card-face-down"
+                  document.getElementById(`card${id}`).style.borderColor = "rgb(254, 251, 251)"
+                  document.getElementById(`type${id}`).style.color = "#fcfcfc"
+                  document.getElementById(`number${id}`).style.color = "#fcfcfc"
+                }
+          
+              }
+              
+              //สุ่มไพ่ xใบ กำหนดตอนแรก
+              randcard(cardList.length)
+          }
+          
+          
+          
+          
+          </script>
+    
+</body>
+</html>
+
+

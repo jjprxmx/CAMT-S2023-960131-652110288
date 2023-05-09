@@ -203,7 +203,10 @@
     ]
 window.onload = function() {
     createcard(x)
+
 };
+
+
 
 function createcard(amount) {
         let i = 0;
@@ -265,12 +268,14 @@ function renderCardList() {
             //after random type and number send data to display function
             display(i+1, cardList[i].value[0], cardList[i].value[1], cardList[i].isFaceDown)
             i++
-        }  
+        }
+        
 // for check only        
 console.log(cardList)
         
     }
     
+
     //set number type ,color and check face
     function display(id , type, number, face){
       if(!face){
@@ -302,7 +307,6 @@ console.log(cardList)
     
     //สุ่มไพ่ xใบ กำหนดตอนแรก
     randcard(x)
-
 }
 
 
