@@ -273,7 +273,7 @@ console.log(cardList)
     
     //set number type ,color and check face
     function display(id , type, number, face){
-      if(face){
+      if(!face){
         if(type == "♦" || type == "♥"){
             document.getElementById(`type${id}`).innerHTML = type;
             document.getElementById(`number${id}`).innerHTML = number;
