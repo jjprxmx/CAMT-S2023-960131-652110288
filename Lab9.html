@@ -1,0 +1,164 @@
+<html>
+<head>
+  <title>Fetching data from API</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+  <body style="font-family: 'Kanit', sans-serif;">
+    <center><h1>Fetching data from API</h1></center>
+    <audio src="" id="sound"></audio>
+    <div class="container">
+
+      <div class="input-group mb-3">
+        <input id="todo-input" type="text" class="form-control" placeholder="Please enter" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button id="todo-add-button" class="btn btn-outline-secondary" type="button">Add</button>
+      </div>
+        <div id="todo-list-container"></div>
+    </div>
+  </body>
+<script>
+  /* open crudcrud.com and then replace ID and resource name. */
+  // BEGIN: configuration zone
+  var CRUD_CURD_ID = "18a44952c61e488da3a3710415bae270";
+  var CRUD_CURD_RESOURCE_NAME = "todo";
+  var CURD_CURD_API_ENDPOINT =
+    "https://crudcrud.com/api/" + CRUD_CURD_ID + "/" + CRUD_CURD_RESOURCE_NAME;
+  // END:configuration zone
+  
+  // BEGIN: application variables zone
+  var APPLICATION_STATE = {
+    todoList: []
+  }
+  // END: application variables zone
+  
+  // BEGIN: utility function zone
+  function htmlToElem(html) {
+    let temp = document.createElement("template");
+    html = html.trim(); // Never return a space text node as a result
+    temp.innerHTML = html;
+    return temp.content.firstChild;
+  }
+  // END: utility function zone
+  
+  // BEGIN: API fetching zone
+  function loadTodoList(afterLoadFunction) {
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: "GET",
+      headers: headers
+    };
+  
+    fetch(CURD_CURD_API_ENDPOINT, requestOptions).then(function (response) {
+      response.json().then(function (data) {
+        afterLoadFunction(data);
+      });
+    });
+  }
+  
+  function addNewTodoItem(value, afterAddFunction) {
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: "POST",
+      body: JSON.stringify({
+        name: value
+      }),
+      headers: headers
+    };
+  
+    fetch(CURD_CURD_API_ENDPOINT, requestOptions).then(function (response) {
+      response.json().then(function (data) {
+        afterAddFunction(data);
+      });
+    });
+  }
+  
+  // END: API fetching zone
+  
+  // BEGIN: UI Control and logic zone
+  function bindEvents() {
+    var addButtonElm = document.getElementById("todo-add-button");
+    addButtonElm.addEventListener("click", function () {
+      var inputElm = document.getElementById("todo-input");
+      var todoValue = inputElm.value;
+      inputElm.value = "";
+      if (todoValue !== "") {
+        addNewTodoItem(todoValue, function () {
+          song("add")
+        });
+      }
+    });
+  }
+  
+  function renderTodoList() {
+    var todoListElm = document.getElementById("todo-list-container");
+    todoListElm.innerHTML = '<div class="container text-center"></div>';
+  
+    for (var idx = 0; idx < APPLICATION_STATE.todoList.length; idx++) {
+      var todoItem = APPLICATION_STATE.todoList[idx];
+      var todoItemElm = htmlToElem(
+        `
+        
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-6">${idx+1}: ${todoItem.name}</div>
+          <div class="col"><button id='todo-delete-button' class="btn btn-danger" onclick='deleteTodoItem("${todoItem._id}",() => song("del"))'>delete</button></div>
+          </div>
+      
+        `
+      );
+      todoListElm.append(todoItemElm);
+    }
+  }
+  
+  function refreshTodoList () {
+    loadTodoList(function (data) {
+      APPLICATION_STATE.todoList = data;
+      renderTodoList();
+    });
+  }
+  
+  window.onload = function () {
+    bindEvents();
+    refreshTodoList();
+  };
+  
+  // END: UI Control and logic zone
+
+  //Add
+  function deleteTodoItem(id, afterDeleteFunction) {
+    var requestOptions = {
+      method: "DELETE"
+    };
+   
+
+    fetch(`${CURD_CURD_API_ENDPOINT}/${id}`, requestOptions)
+    .then(afterDeleteFunction)
+  }
+
+  function song(type){
+    const sond=document.getElementById('div')
+
+    switch(type){
+    case "del": sound.src = "music/digitcell-wrong.mp3"
+                sound.autoplay = true
+                refreshTodoList()
+                break 
+    case "add": sound.src = "music/correct-choice-43861.mp3"
+                sound.autoplay = true
+                refreshTodoList()
+                break
+    }
+  }
+
+
+
+
+</script>
+</html>
